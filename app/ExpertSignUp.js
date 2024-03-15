@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { ScrollView, View, Text, TouchableOpacity, StyleSheet, TextInput } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import { Picker } from '@react-native-picker/picker';
+
 
 const JuniorFormScreen = () => {
   // State hooks for each input field
@@ -55,12 +57,32 @@ const JuniorFormScreen = () => {
           value={city}
           onChangeText={setCity}
         />
-         <TextInput
-          style={styles.input}
-          placeholder="Department"
-          value={department}
-          onChangeText={setDepartment}
-        />
+        <View style={styles.pickerContainer}>
+          <Picker
+            selectedValue={department}
+            onValueChange={(itemValue, itemIndex) => setDepartment(itemValue)}
+            style={styles.picker}
+            mode="dropdown" // Android only
+          >
+            <Picker.Item label="Select Department" value="" />
+            <Picker.Item label="Front-End" value="front" />
+            <Picker.Item label="Back-End" value="back" />
+            <Picker.Item label="Full-Stack" value="full" />
+            <Picker.Item label="Database Administration" value="database" />
+            <Picker.Item label="DevOps" value="devops" />
+            <Picker.Item label="System" value="system" />
+            <Picker.Item label="Cybersecurity Analysis" value="cybersecurity" />
+            <Picker.Item label="Data Science" value="Data" />
+            <Picker.Item label="Machine Learning" value="ml" />
+            <Picker.Item label="ai" value="AI" />
+            <Picker.Item label="Mobile App Development" value="mobile" />
+            <Picker.Item label="User Interface (UI) Design" value="ui" />
+            <Picker.Item label="Web Development" value="web" />
+            <Picker.Item label="Embedded Systems Engineering" value="embedded" />
+            <Picker.Item label="User Experience (UX) Design" value="ux" />
+            <Picker.Item label="Software Project Management" value="software" />
+          </Picker>
+        </View>
         <TextInput
           style={styles.input}
           placeholder="School or Company"
@@ -113,7 +135,16 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     // Add other styles for the app name if needed
   },
-  
+  pickerContainer: {
+    backgroundColor: '#FFFFFF',
+    borderRadius: 10,
+    marginBottom: 10,
+    overflow: 'hidden', // This property is important to make borderRadius work for Picker
+  },
+  picker: {
+    width: '100%',
+    // You may not need to set the height depending on your Picker's default appearance
+  },
   subHeaderText: {
     fontSize: 30,
     fontWeight: 'bold',
