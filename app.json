@@ -8,6 +8,9 @@
       "expo-router"
     ],
     "name": "CodaXtrim-Project",
-    "slug": "CodaXtrim-Project"
+    "slug": "CodaXtrim-Project",
+    "android": {
+      "package": "com.codaxtrim.project"
+    }
   }
 }

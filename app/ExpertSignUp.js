@@ -15,10 +15,20 @@ const JuniorFormScreen = () => {
   const [school, setSchool] = useState('');
   const [experience, setExperience] = useState('');
   const [note, setNote] = useState('');
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
 
   // ... other state hooks for each field experience
 
   const navigation = useNavigation(); 
+
+  const handleSubmit = () => {
+    if (password !== confirmPassword) {
+      alert('Passwords do not match!');
+      return;
+    }
+    // Proceed with the submission process
+  };
 
 
   return (
@@ -97,6 +107,20 @@ const JuniorFormScreen = () => {
         />
         <TextInput
           style={styles.input}
+          placeholder="Password"
+          secureTextEntry={true}
+          value={password}
+          onChangeText={setPassword}
+        />
+        <TextInput
+          style={styles.input}
+          placeholder="Confirm Password"
+          secureTextEntry={true}
+          value={confirmPassword}
+          onChangeText={setConfirmPassword}
+        />
+        <TextInput
+          style={styles.input}
           placeholder="Leave note for us"
           value={note}
           onChangeText={setNote}
@@ -105,7 +129,7 @@ const JuniorFormScreen = () => {
         
         {/* Repeat for each field */}
       </View>
-      <TouchableOpacity style={styles.button}>
+      <TouchableOpacity style={styles.button} onPress={handleSubmit}>
         <Text style={styles.buttonText}>Send</Text>
       </TouchableOpacity>
       <TouchableOpacity  onPress={() => navigation.navigate('PrivacyPolicyScreen')}>

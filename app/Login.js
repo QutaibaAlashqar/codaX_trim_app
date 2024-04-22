@@ -1,99 +1,101 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, StyleSheet, Modal, Pressable } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, StyleSheet, Modal, Pressable, Alert } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import userData from '../users.json';
 
 const LoginScreen = () => {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [showForgotPassword, setShowForgotPassword] = useState(false);
+  const navigation = useNavigation();
 
-    const [showForgotPassword, setShowForgotPassword] = useState(false);
-    const [email, setEmail] = useState('');
-    const navigation = useNavigation(); 
+  const handleLogin = () => {
+      // Find the user in the userData array
+      const user = userData.find(u => u.email === email && u.password === password);
+      
+      // Show appropriate alert based on whether the user was found
+      if (user) {
+          Alert.alert('Login Success', `Welcome, ${user.name}.`);
+          if (user.role === 'E') {
+            //navigation.navigate('ExpertHomeScreen', { user }); // Pass user data as a parameter
+          } else if (user.role === 'J') {
+            navigation.navigate('JuniorHomeScreen');
+          }
+      } else {
+          Alert.alert('Login Failed', 'The email or password is incorrect.');
+      }
+  };
 
-    const handleForgotPassword = () => {
-      // Implement logic to handle password reset submission here
-      console.log("Forgot Password submitted with email:", email);
-      // Close the password reset dialog
-      setShowForgotPassword(false);
-    }
-
-    const forgotPasswordInputStyle = {
-      height: 50,
-      borderColor: '#000',
-      borderWidth: 2.5,
-      borderRadius: 15,
-      width: '100%',
-      marginBottom: 20,
-      paddingHorizontal: 20,
-      backgroundColor: '#FFF', // White color
-      fontSize: 20, // Increase font size
-    };
-
-
-    return (
+  return (
       <View style={styles.container}>
-        <View style={styles.card}>
-          <Text style={styles.logoText}>{'</>'}</Text>
-          <Text style={styles.appName}>CodaXtrim</Text>
-          <TextInput 
-            style={styles.input} 
-            placeholder="User Name" 
-            placeholderTextColor="#000" 
-          />
-          <TextInput 
-            style={styles.input} 
-            placeholder="Password" 
-            secureTextEntry={true}
-            placeholderTextColor="#000" 
-          />
-          <TouchableOpacity onPress={() => setShowForgotPassword(true)}>
-            <Text style={styles.forgotPassword}>forgot Your Password?</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.loginButton}>
-            <Text style={styles.loginButtonText}>Log in</Text>
-          </TouchableOpacity>
-          <TouchableOpacity  onPress={() => navigation.navigate('PrivacyPolicyScreen')}>
-            <Text style={styles.privacyPolicy}>Privacy Policy</Text>
-          </TouchableOpacity>
-        </View>
+          <View style={styles.card}>
+              <Text style={styles.logoText}>{'</>'}</Text>
+              <Text style={styles.appName}>CodaXtrim</Text>
+              <TextInput
+                  style={styles.input}
+                  placeholder="Email"
+                  placeholderTextColor="#000"
+                  onChangeText={setEmail}
+                  value={email}
+              />
+              <TextInput
+                  style={styles.input}
+                  placeholder="Password"
+                  secureTextEntry={true}
+                  placeholderTextColor="#000"
+                  onChangeText={setPassword}
+                  value={password}
+              />
+              <TouchableOpacity onPress={() => setShowForgotPassword(true)}>
+                  <Text style={styles.forgotPassword}>Forgot Your Password?</Text>
+              </TouchableOpacity>
+              <TouchableOpacity style={styles.loginButton} onPress={handleLogin}>
+                  <Text style={styles.loginButtonText}>Log in</Text>
+              </TouchableOpacity>
+              <TouchableOpacity onPress={() => navigation.navigate('PrivacyPolicyScreen')}>
+                  <Text style={styles.privacyPolicy}>Privacy Policy</Text>
+              </TouchableOpacity>
+          </View>
 
-
-
-        {/* Forgot Password Dialog */}
-        <Modal
-                animationType="slide"
-                transparent={true}
-                visible={showForgotPassword}
-                onRequestClose={() => setShowForgotPassword(false)}
-            >
-                <View style={styles.centeredView}>
-                    <View style={styles.modalView}>
-                        <TextInput 
-                            style={forgotPasswordInputStyle} 
-                            placeholder="Enter your email" 
-                            placeholderTextColor="#000"
-                            value={email}
-                            onChangeText={setEmail}
-                        />
-                        <Pressable
-                            style={[styles.button, styles.submitButton]}
-                            onPress={handleForgotPassword}
-                        >
-                            <Text style={styles.buttonText}>Submit</Text>
-                        </Pressable>
-                        <Pressable
-                            style={[styles.button, styles.closeButton]}
-                            onPress={() => setShowForgotPassword(false)}
-                        >
-                            <Text style={styles.buttonText}>Close</Text>
-                        </Pressable>
-                    </View>
-                </View>
-            </Modal>
-
-
+          {/* Forgot Password Dialog */}
+          <Modal
+              animationType="slide"
+              transparent={true}
+              visible={showForgotPassword}
+              onRequestClose={() => setShowForgotPassword(false)}
+          >
+              <View style={styles.centeredView}>
+                  <View style={styles.modalView}>
+                      <TextInput
+                          style={styles.input}
+                          placeholder="Enter your email"
+                          placeholderTextColor="#000"
+                          onChangeText={setEmail}
+                          value={email}
+                      />
+                      <Pressable
+                          style={[styles.button, styles.submitButton]}
+                          onPress={() => {
+                              // Handle password reset logic here
+                              setShowForgotPassword(false);
+                          }}
+                      >
+                          <Text style={styles.buttonText}>Submit</Text>
+                      </Pressable>
+                      <Pressable
+                          style={[styles.button, styles.buttonClose]}
+                          onPress={() => setShowForgotPassword(false)}
+                      >
+                          <Text style={styles.buttonText}>Close</Text>
+                      </Pressable>
+                  </View>
+              </View>
+          </Modal>
       </View>
-    );
+  );
 };
 
+// Define your styles here
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -154,39 +156,42 @@ const styles = StyleSheet.create({
     fontSize: 12, // Adjust your size
     fontWeight: 'bold',
   },
-
-  // Additional styles for the password reset dialog
   centeredView: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: 'rgba(2, 0.6, 0.5, 0.1)' // Semi-transparent background
-},
-modalView: {
-    backgroundColor: "white",
-    borderRadius: 20,
-    padding: 20,
-    alignItems: "center",
-    elevation: 10,
-},
-button: {
-    borderRadius: 20,
-    padding: 10 ,
-    elevation: 10,
-    marginVertical: 5,
-},
-buttonText: {
-    fontWeight: 'bold',
-    textAlign: 'center',
-    fontSize: 20,
-},
-submitButton: {
-    backgroundColor: "gray",
-},
-closeButton: {
-    backgroundColor: "red",
-}
-
+      flex: 1,
+      justifyContent: 'center',
+      alignItems: 'center',
+      backgroundColor: 'rgba(0, 0, 0, 0.4)',
+  },
+  modalView: {
+      backgroundColor: 'white',
+      borderRadius: 20,
+      padding: 35,
+      alignItems: 'center',
+      shadowColor: '#000',
+      shadowOffset: {
+          width: 0,
+          height: 2
+      },
+      shadowOpacity: 0.25,
+      shadowRadius: 4,
+      elevation: 5
+  },
+  button: {
+      borderRadius: 20,
+      padding: 10,
+      elevation: 2
+  },
+  submitButton: {
+      backgroundColor: '#2196F3',
+  },
+  buttonClose: {
+      backgroundColor: '#2196F3',
+  },
+  buttonText: {
+      color: 'white',
+      fontWeight: 'bold',
+      textAlign: 'center'
+  }
 });
 
 export default LoginScreen;

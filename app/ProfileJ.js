@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { ScrollView, View, Text, TouchableOpacity, StyleSheet, TextInput } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
-const JuniorFormScreen = () => {
+const ProfileJ = () => {
   // State hooks for each input field
   const [fullName, setFullName] = useState('');
   const [email, setEmail] = useState('');
@@ -26,9 +26,7 @@ const JuniorFormScreen = () => {
 
   return (
     <ScrollView style={styles.container}>
-      <Text style={styles.logoText}>{'</>'}</Text>
-      <Text style={styles.appName}>CodaXtrim</Text>
-      <Text style={styles.subHeaderText}>Junior</Text>
+      <Text style={styles.subHeaderText}>Profile Details</Text>
       <View style={styles.formContainer}>
         <TextInput
           style={styles.input}
@@ -91,10 +89,7 @@ const JuniorFormScreen = () => {
         {/* Repeat for each field */}
       </View>
       <TouchableOpacity style={styles.button} onPress={handleSubmit}>
-        <Text style={styles.buttonText}>Send</Text>
-      </TouchableOpacity>
-      <TouchableOpacity  onPress={() => navigation.navigate('PrivacyPolicyScreen')}>
-        <Text style={styles.privacyPolicyText}>Privacy Policy</Text>
+        <Text style={styles.buttonText}>Save</Text>
       </TouchableOpacity>
     </ScrollView>
   );
@@ -104,28 +99,13 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#D29B0D', // Color from the design
-  },
-  logoText: {
-    marginTop: 30,
-    fontSize: 50,
-    fontWeight: 'bold',
-    textAlign: 'center',
-    marginBottom: 5,
-    // Add other styles for the logo text if needed
-  },
-  appName: {
-    fontSize: 30,
-    fontWeight: 'bold',
-    textAlign: 'center',
-    marginBottom: 30,
-    // Add other styles for the app name if needed
-  },
-  
+  },  
   subHeaderText: {
     fontSize: 30,
     fontWeight: 'bold',
     textAlign: 'center',
     marginBottom: 40,
+    marginTop: 40,
   },
   formContainer: {
     marginHorizontal: 20,
@@ -154,13 +134,6 @@ const styles = StyleSheet.create({
     fontSize: 20,
     textAlign: 'center',
   },
-  privacyPolicyText: {
-    color: 'blue',
-    textAlign: 'center',
-    fontWeight: 'bold',
-    marginTop: 20,
-    textDecorationLine: 'underline',
-  },
 });
 
-export default JuniorFormScreen;
+export default ProfileJ;
