@@ -2,44 +2,49 @@ import React, { useState, useEffect } from 'react';
 import { View, StyleSheet, Text, ScrollView, TouchableOpacity, ActivityIndicator, TouchableWithoutFeedback, Modal } from 'react-native';
 import HeaderComponent from './Header';
 import Icon from 'react-native-vector-icons/MaterialIcons'; 
+import { useNavigation } from '@react-navigation/native';
+import { SafeAreaView } from 'react-native';
 
 
 // User data
 const users = [
-  { "TC": "11111222225", "email": "qutaibaE1@gmail.com", "password": "12345", "role": "E", "name": "QutaibaE1", "age": "40", "city": "Ankara", "phone": "05525300477", "depertment": "Back-end", "com_sch": "X Company", "years": "18", "like-counter": "200" },
-  { "TC": "11111222225", "email": "qutaibaE2@gmail.com", "password": "12345", "role": "E", "name": "QutaibaE2", "age": "40", "city": "Ankara", "phone": "05525300477", "depertment": "Front-end", "com_sch": "X Company", "years": "18", "like-counter": "200" },
-  { "TC": "11111222225", "email": "qutaibaE3@gmail.com", "password": "12345", "role": "E", "name": "QutaibaE3", "age": "40", "city": "Ankara", "phone": "05525300477", "depertment": "AI", "com_sch": "X Company", "years": "18", "like-counter": "200" },
-  { "TC": "11111222225", "email": "qutaibaE4@gmail.com", "password": "12345", "role": "E", "name": "QutaibaE4", "age": "40", "city": "Ankara", "phone": "05525300477", "depertment": "Full-Stack", "com_sch": "X Company", "years": "18", "like-counter": "200" },
-  { "TC": "11111222225", "email": "qutaibaE5@gmail.com", "password": "12345", "role": "E", "name": "QutaibaE5", "age": "40", "city": "Ankara", "phone": "05525300477", "depertment": "Database Administration", "com_sch": "X Company", "years": "18", "like-counter": "200" },
-  { "TC": "11111222225", "email": "qutaibaE6@gmail.com", "password": "12345", "role": "E", "name": "QutaibaE6", "age": "40", "city": "Ankara", "phone": "05525300477", "depertment": "Back-end", "com_sch": "X Company", "years": "18", "like-counter": "200" },
-  { "TC": "11111222225", "email": "qutaibaE7@gmail.com", "password": "12345", "role": "E", "name": "QutaibaE7", "age": "40", "city": "Ankara", "phone": "05525300477", "depertment": "Front-end", "com_sch": "X Company", "years": "18", "like-counter": "200" },
-  { "TC": "11111222225", "email": "qutaibaE8@gmail.com", "password": "12345", "role": "E", "name": "QutaibaE8", "age": "40", "city": "Ankara", "phone": "05525300477", "depertment": "AI", "com_sch": "X Company", "years": "18", "like-counter": "200" },
-  { "TC": "11111222225", "email": "qutaibaE9@gmail.com", "password": "12345", "role": "E", "name": "QutaibaE9", "age": "40", "city": "Ankara", "phone": "05525300477", "depertment": "Full-Stack", "com_sch": "X Company", "years": "18", "like-counter": "200" },
-  { "TC": "11111222225", "email": "qutaibaE10@gmail.com", "password": "12345", "role": "E", "name": "QutaibaE10", "age": "40", "city": "Ankara", "phone": "05525300477", "depertment": "Database Administration", "com_sch": "X Company", "years": "18", "like-counter": "200" },
-  { "TC": "11111222225", "email": "qutaibaJ1@gmail.com", "password": "12345", "role": "J", "name": "QutaibaJ1", "age": "20", "city": "Ankara", "phone": "05525300477", "com_sch": "Ankara Uni", "like-counter": "200" },
-  { "TC": "11111222225", "email": "qutaibaJ2@gmail.com", "password": "12345", "role": "J", "name": "QutaibaJ2", "age": "20", "city": "Ankara", "phone": "05525300477", "com_sch": "Ankara Uni", "like-counter": "200" },
-  { "TC": "11111222225", "email": "qutaibaJ3@gmail.com", "password": "12345", "role": "J", "name": "QutaibaJ3", "age": "20", "city": "Ankara", "phone": "05525300477", "com_sch": "Ankara Uni", "like-counter": "200" },
-  { "TC": "11111222225", "email": "qutaibaJ4@gmail.com", "password": "12345", "role": "J", "name": "QutaibaJ4", "age": "20", "city": "Ankara", "phone": "05525300477", "com_sch": "Ankara Uni", "like-counter": "200" },
-  { "TC": "11111222225", "email": "qutaibaJ5@gmail.com", "password": "12345", "role": "J", "name": "QutaibaJ5", "age": "20", "city": "Ankara", "phone": "05525300477", "com_sch": "Ankara Uni", "like-counter": "200" },
-  { "TC": "11111222225", "email": "qutaibaJ6@gmail.com", "password": "12345", "role": "J", "name": "QutaibaJ6", "age": "20", "city": "Ankara", "phone": "05525300477", "com_sch": "Ankara Uni", "like-counter": "200" },
-  { "TC": "11111222225", "email": "qutaibaJ7@gmail.com", "password": "12345", "role": "J", "name": "QutaibaJ7", "age": "20", "city": "Ankara", "phone": "05525300477", "com_sch": "Ankara Uni", "like-counter": "200" },
-  { "TC": "11111222225", "email": "qutaibaJ8@gmail.com", "password": "12345", "role": "J", "name": "QutaibaJ8", "age": "20", "city": "Ankara", "phone": "05525300477", "com_sch": "Ankara Uni", "like-counter": "200" },
-  { "TC": "11111222225", "email": "qutaibaJ9@gmail.com", "password": "12345", "role": "J", "name": "QutaibaJ9", "age": "20", "city": "Ankara", "phone": "05525300477", "com_sch": "Ankara Uni", "like-counter": "200" },
-  { "TC": "11111222225", "email": "qutaibaJ10@gmail.com", "password": "12345", "role": "J", "name": "QutaibaJ10", "age": "20", "city": "Ankara", "phone": "05525300477", "com_sch": "Ankara Uni", "like-counter": "200" },
-  { "TC": "11111222225", "email": "qutaibaJ11@gmail.com", "password": "12345", "role": "J", "name": "QutaibaJ11", "age": "20", "city": "Ankara", "phone": "05525300477", "com_sch": "Ankara Uni", "like-counter": "200" },
-  { "TC": "11111222225", "email": "qutaibaJ12@gmail.com", "password": "12345", "role": "J", "name": "QutaibaJ12", "age": "20", "city": "Ankara", "phone": "05525300477", "com_sch": "Ankara Uni", "like-counter": "200" },
-  { "TC": "11111222225", "email": "qutaibaJ13@gmail.com", "password": "12345", "role": "J", "name": "QutaibaJ13", "age": "20", "city": "Ankara", "phone": "05525300477", "com_sch": "Ankara Uni", "like-counter": "200" },
-  { "TC": "11111222225", "email": "qutaibaJ14@gmail.com", "password": "12345", "role": "J", "name": "QutaibaJ14", "age": "20", "city": "Ankara", "phone": "05525300477", "com_sch": "Ankara Uni", "like-counter": "200" },
-  { "TC": "11111222225", "email": "qutaibaJ15@gmail.com", "password": "12345", "role": "J", "name": "QutaibaJ15", "age": "20", "city": "Ankara", "phone": "05525300477", "com_sch": "Ankara Uni", "like-counter": "200" },
-  { "TC": "11111222225", "email": "qutaibaJ16@gmail.com", "password": "12345", "role": "J", "name": "QutaibaJ16", "age": "20", "city": "Ankara", "phone": "05525300477", "com_sch": "Ankara Uni", "like-counter": "200" },
-  { "TC": "11111222225", "email": "qutaibaJ17@gmail.com", "password": "12345", "role": "J", "name": "QutaibaJ17", "age": "20", "city": "Ankara", "phone": "05525300477", "com_sch": "Ankara Uni", "like-counter": "200" },
-  { "TC": "11111222225", "email": "qutaibaJ18@gmail.com", "password": "12345", "role": "J", "name": "QutaibaJ18", "age": "20", "city": "Ankara", "phone": "05525300477", "com_sch": "Ankara Uni", "like-counter": "200" },
-  { "TC": "11111222225", "email": "qutaibaJ19@gmail.com", "password": "12345", "role": "J", "name": "QutaibaJ19", "age": "20", "city": "Ankara", "phone": "05525300477", "com_sch": "Ankara Uni", "like-counter": "200" },
-  { "TC": "11111222225", "email": "qutaibaJ20@gmail.com", "password": "12345", "role": "J", "name": "QutaibaJ20", "age": "20", "city": "Ankara", "phone": "05525300477", "com_sch": "Ankara Uni", "like-counter": "200" }
+  { "TC": "11111222225", "email": "qutaibaE1@gmail.com", "password": "12345", "role": "E", "name": "QutaibaE1", "age": "40", "city": "Ankara", "phone": "05525300477", "depertment": "Back-end", "com_sch": "X Company", "years": "18", "like-counter": "200", "goined": "05.05.2023" },
+  { "TC": "11111222225", "email": "qutaibaE2@gmail.com", "password": "12345", "role": "E", "name": "QutaibaE2", "age": "40", "city": "Ankara", "phone": "05525300477", "depertment": "Front-end", "com_sch": "X Company", "years": "18", "like-counter": "200", "goined": "05.05.2023" },
+  { "TC": "11111222225", "email": "qutaibaE3@gmail.com", "password": "12345", "role": "E", "name": "QutaibaE3", "age": "40", "city": "Ankara", "phone": "05525300477", "depertment": "AI", "com_sch": "X Company", "years": "18", "like-counter": "200", "goined": "05.05.2023" },
+  { "TC": "11111222225", "email": "qutaibaE4@gmail.com", "password": "12345", "role": "E", "name": "QutaibaE4", "age": "40", "city": "Ankara", "phone": "05525300477", "depertment": "Full-Stack", "com_sch": "X Company", "years": "18", "like-counter": "200", "goined": "05.05.2023" },
+  { "TC": "11111222225", "email": "qutaibaE5@gmail.com", "password": "12345", "role": "E", "name": "QutaibaE5", "age": "40", "city": "Ankara", "phone": "05525300477", "depertment": "Database Administration", "com_sch": "X Company", "years": "18", "like-counter": "200", "goined": "05.05.2023" },
+  { "TC": "11111222225", "email": "qutaibaE6@gmail.com", "password": "12345", "role": "E", "name": "QutaibaE6", "age": "40", "city": "Ankara", "phone": "05525300477", "depertment": "Back-end", "com_sch": "X Company", "years": "18", "like-counter": "200", "goined": "05.05.2023" },
+  { "TC": "11111222225", "email": "qutaibaE7@gmail.com", "password": "12345", "role": "E", "name": "QutaibaE7", "age": "40", "city": "Ankara", "phone": "05525300477", "depertment": "Front-end", "com_sch": "X Company", "years": "18", "like-counter": "200", "goined": "05.05.2023" },
+  { "TC": "11111222225", "email": "qutaibaE8@gmail.com", "password": "12345", "role": "E", "name": "QutaibaE8", "age": "40", "city": "Ankara", "phone": "05525300477", "depertment": "AI", "com_sch": "X Company", "years": "18", "like-counter": "200", "goined": "05.05.2023" },
+  { "TC": "11111222225", "email": "qutaibaE9@gmail.com", "password": "12345", "role": "E", "name": "QutaibaE9", "age": "40", "city": "Ankara", "phone": "05525300477", "depertment": "Full-Stack", "com_sch": "X Company", "years": "18", "like-counter": "200", "goined": "05.05.2023" },
+  { "TC": "11111222225", "email": "qutaibaE10@gmail.com", "password": "12345", "role": "E", "name": "QutaibaE10", "age": "40", "city": "Ankara", "phone": "05525300477", "depertment": "Database Administration", "com_sch": "X Company", "years": "18", "like-counter": "200", "goined": "05.05.2023" },
+  { "TC": "11111222225", "email": "qutaibaJ1@gmail.com", "password": "12345", "role": "J", "name": "QutaibaJ1", "age": "20", "city": "Ankara", "phone": "05525300477", "com_sch": "Ankara Uni", "like-counter": "200", "goined": "05.05.2023", "years": "0", "depertment": "Student" },
+  { "TC": "11111222225", "email": "qutaibaJ2@gmail.com", "password": "12345", "role": "J", "name": "QutaibaJ2", "age": "20", "city": "Ankara", "phone": "05525300477", "com_sch": "Ankara Uni", "like-counter": "200", "goined": "05.05.2023", "years": "0", "depertment": "Student" },
+  { "TC": "11111222225", "email": "qutaibaJ3@gmail.com", "password": "12345", "role": "J", "name": "QutaibaJ3", "age": "20", "city": "Ankara", "phone": "05525300477", "com_sch": "Ankara Uni", "like-counter": "200", "goined": "05.05.2023", "years": "0", "depertment": "Student" },
+  { "TC": "11111222225", "email": "qutaibaJ4@gmail.com", "password": "12345", "role": "J", "name": "QutaibaJ4", "age": "20", "city": "Ankara", "phone": "05525300477", "com_sch": "Ankara Uni", "like-counter": "200", "goined": "05.05.2023", "years": "0", "depertment": "Student" },
+  { "TC": "11111222225", "email": "qutaibaJ5@gmail.com", "password": "12345", "role": "J", "name": "QutaibaJ5", "age": "20", "city": "Ankara", "phone": "05525300477", "com_sch": "Ankara Uni", "like-counter": "200", "goined": "05.05.2023", "years": "0", "depertment": "Student" },
+  { "TC": "11111222225", "email": "qutaibaJ6@gmail.com", "password": "12345", "role": "J", "name": "QutaibaJ6", "age": "20", "city": "Ankara", "phone": "05525300477", "com_sch": "Ankara Uni", "like-counter": "200", "goined": "05.05.2023", "years": "0", "depertment": "Student" },
+  { "TC": "11111222225", "email": "qutaibaJ7@gmail.com", "password": "12345", "role": "J", "name": "QutaibaJ7", "age": "20", "city": "Ankara", "phone": "05525300477", "com_sch": "Ankara Uni", "like-counter": "200", "goined": "05.05.2023", "years": "0", "depertment": "Student" },
+  { "TC": "11111222225", "email": "qutaibaJ8@gmail.com", "password": "12345", "role": "J", "name": "QutaibaJ8", "age": "20", "city": "Ankara", "phone": "05525300477", "com_sch": "Ankara Uni", "like-counter": "200", "goined": "05.05.2023", "years": "0", "depertment": "Student" },
+  { "TC": "11111222225", "email": "qutaibaJ9@gmail.com", "password": "12345", "role": "J", "name": "QutaibaJ9", "age": "20", "city": "Ankara", "phone": "05525300477", "com_sch": "Ankara Uni", "like-counter": "200", "goined": "05.05.2023", "years": "0", "depertment": "Student" },
+  { "TC": "11111222225", "email": "qutaibaJ10@gmail.com", "password": "12345", "role": "J", "name": "QutaibaJ10", "age": "20", "city": "Ankara", "phone": "05525300477", "com_sch": "Ankara Uni", "like-counter": "200", "goined": "05.05.2023", "years": "0", "depertment": "Student" },
+  { "TC": "11111222225", "email": "qutaibaJ11@gmail.com", "password": "12345", "role": "J", "name": "QutaibaJ11", "age": "20", "city": "Ankara", "phone": "05525300477", "com_sch": "Ankara Uni", "like-counter": "200", "goined": "05.05.2023", "years": "0", "depertment": "Student" },
+  { "TC": "11111222225", "email": "qutaibaJ12@gmail.com", "password": "12345", "role": "J", "name": "QutaibaJ12", "age": "20", "city": "Ankara", "phone": "05525300477", "com_sch": "Ankara Uni", "like-counter": "200", "goined": "05.05.2023", "years": "0", "depertment": "Student" },
+  { "TC": "11111222225", "email": "qutaibaJ13@gmail.com", "password": "12345", "role": "J", "name": "QutaibaJ13", "age": "20", "city": "Ankara", "phone": "05525300477", "com_sch": "Ankara Uni", "like-counter": "200", "goined": "05.05.2023", "years": "0", "depertment": "Student" },
+  { "TC": "11111222225", "email": "qutaibaJ14@gmail.com", "password": "12345", "role": "J", "name": "QutaibaJ14", "age": "20", "city": "Ankara", "phone": "05525300477", "com_sch": "Ankara Uni", "like-counter": "200", "goined": "05.05.2023", "years": "0", "depertment": "Student" },
+  { "TC": "11111222225", "email": "qutaibaJ15@gmail.com", "password": "12345", "role": "J", "name": "QutaibaJ15", "age": "20", "city": "Ankara", "phone": "05525300477", "com_sch": "Ankara Uni", "like-counter": "200", "goined": "05.05.2023", "years": "0", "depertment": "Student" },
+  { "TC": "11111222225", "email": "qutaibaJ16@gmail.com", "password": "12345", "role": "J", "name": "QutaibaJ16", "age": "20", "city": "Ankara", "phone": "05525300477", "com_sch": "Ankara Uni", "like-counter": "200", "goined": "05.05.2023", "years": "0", "depertment": "Student" },
+  { "TC": "11111222225", "email": "qutaibaJ17@gmail.com", "password": "12345", "role": "J", "name": "QutaibaJ17", "age": "20", "city": "Ankara", "phone": "05525300477", "com_sch": "Ankara Uni", "like-counter": "200", "goined": "05.05.2023", "years": "0", "depertment": "Student" },
+  { "TC": "11111222225", "email": "qutaibaJ18@gmail.com", "password": "12345", "role": "J", "name": "QutaibaJ18", "age": "20", "city": "Ankara", "phone": "05525300477", "com_sch": "Ankara Uni", "like-counter": "200", "goined": "05.05.2023", "years": "0", "depertment": "Student" },
+  { "TC": "11111222225", "email": "qutaibaJ19@gmail.com", "password": "12345", "role": "J", "name": "QutaibaJ19", "age": "20", "city": "Ankara", "phone": "05525300477", "com_sch": "Ankara Uni", "like-counter": "200", "goined": "05.05.2023", "years": "0", "depertment": "Student" },
+  { "TC": "11111222225", "email": "qutaibaJ20@gmail.com", "password": "12345", "role": "J", "name": "QutaibaJ20", "age": "20", "city": "Ankara", "phone": "05525300477", "com_sch": "Ankara Uni", "like-counter": "200", "goined": "05.05.2023", "years": "0", "depertment": "Student" }
 ];
 
 // Main component
 const JuniorHomeScreen = () => {
+
+    const navigation = useNavigation(); 
+
 
     const [isLoading, setIsLoading] = useState(true);
     const [searchText, setSearchText] = useState('');
@@ -77,7 +82,6 @@ const JuniorHomeScreen = () => {
       });
     setFilteredUsers(filtered);
     };
-
 
     const toggleModal = () => {
         setIsModalVisible(!isModalVisible);
@@ -167,13 +171,87 @@ const JuniorHomeScreen = () => {
                         <View>
                             <View style={styles.profileCover}>
                                 <View style={styles.profileCoverContent}>
+                                    <View style={styles.activeStatus1}>
+                                        <Text style={styles.activeText1}>Active</Text>
+                                    </View>
+                                    <Text style={styles.codaXtrimText}>CodaXtrim</Text>
                                     <Icon style={styles.icon11} name="account-circle" size={100} color="black" />
+                                    
+
+                                        <View style={styles.activeStatus111}>
+                                            <Text style={styles.activeText}>Expert</Text>
+                                        </View>
                                     
                                 </View>
                             </View>
-                            <Text style={styles.text11}>Name: {selectedUser.name}</Text>
-                            <Text>Department: {selectedUser.depertment}</Text>
-                            <Text>Company/School: {selectedUser.com_sch}</Text>
+                            
+                            <View>
+                                <View style={styles.detailItem}>
+                                    <Icon name="person" size={20} color="black" style={styles.icon111} />
+                                    <Text style={styles.text11}>{selectedUser.name}</Text>
+                                </View>
+                                <View style={styles.detailItem}>
+                                    <Icon name="location-pin" size={20} color="black" style={styles.icon111} />
+                                    <Text style={styles.text22}>{selectedUser.city}</Text>
+                                </View>
+                                <View style={styles.detailItem}>
+                                    <Icon name="work" size={20} color="black" style={styles.icon111} />
+                                    <Text style={styles.text22}>{selectedUser.depertment}</Text>
+                                </View>
+                                
+                                <View style={styles.detailItem}>
+                                    <Icon name="star" size={25} color="#FFD700" />
+                                    <Icon name="star" size={25} color="#FFD700" />
+                                    <Icon name="star" size={25} color="#FFD700" />
+                                    <Icon name="star-half" size={25} color="#FFD700" />
+                                    <Icon name="star-outline" size={25} color="#BBB" />
+                                </View>
+
+                                <View style={styles.detailItem}>
+                                    <Text style={styles.text22}>--------------------------------------------------------</Text>
+                                </View>
+
+
+                                <View style={styles.detailItem}>
+                                    
+                                    <Text style={styles.text22}>{selectedUser.years} Year Of Experinces</Text>
+                                </View>
+                                <View style={styles.detailItem}>
+                                    <Text style={styles.text22}>Emial: {selectedUser.email}</Text>
+                                </View>
+                                <View style={styles.detailItem}>
+                                    <Text style={styles.text22}>Company/School: {selectedUser.com_sch}</Text>
+                                </View>
+                                <View style={styles.detailItem}>
+                                    <Text style={styles.text22}>Age: {selectedUser.age}</Text>
+                                </View>
+                                <View style={styles.detailItem}>
+                                    <Text style={styles.text22}>Goind Date: {selectedUser.goined}</Text>
+                                </View>
+                            </View>
+
+                            <View style={styles.detailItem}>
+                                <Text style={styles.text22}>--------------------------------------------------------</Text>
+                            </View>
+
+                            <View style={styles.detailItem}>        
+                                <Text style={styles.text33}>If you want to help this Expert and got more rate, press the like button and change his rank.</Text>
+                            </View>
+
+                            <TouchableOpacity>
+                                <View style={styles.detailItem}>
+                                    <Icon name="thumb-up" size={40} color="#FFD700" style={styles.likeButton}/>
+                                    <Text style={styles.likeCount}>{selectedUser['like-counter']}</Text>
+                                </View>
+                            </TouchableOpacity>
+
+                            <TouchableOpacity style={styles.detailItem} onPress={() => navigation.navigate("MessagesJ")}>
+                                <View style={styles.messagesButton}>
+                                    <Text style={styles.messagesText}>Send a message</Text>
+                                </View>
+                            </TouchableOpacity>
+
+
                         </View>
                     )}
                 </View>
@@ -336,7 +414,51 @@ const styles = StyleSheet.create({
   /////
 
 
- 
+  activeStatus1: {
+    position: 'absolute',
+    top: -40, // Adjust if needed
+    right: 0,
+    backgroundColor: '#4CAF50', 
+    padding: 5,
+    borderRadius: 50,
+  },
+  activeStatus111: {
+    position: 'absolute',
+    top: 110,
+    right: 0,
+    padding: 5,
+    borderRadius: 50,
+    backgroundColor: '#9AA1A7'
+  },
+  activeText1: {
+    color: 'white',
+    fontSize: 15,
+  },
+
+
+  codaXtrimText: {
+    color: 'black',
+    fontSize: 22,
+    fontWeight: 'bold',
+    top: -77.5,
+    right: 140,
+  },
+
+
+  massion1: {
+    position: 'absolute',
+    top: 120, // Adjust if needed
+    right: 0,
+    backgroundColor: '#4CAF50', 
+    padding: 5,
+    borderRadius: 50,
+  },
+  messionText1: {
+    color: 'white',
+    fontSize: 17.5,
+  },
+
+
 
   profileCover: {
     backgroundColor: '#D29B0D', // Example color
@@ -362,9 +484,67 @@ const styles = StyleSheet.create({
     fontSize: 18,
     marginLeft: 10,
   },
+  detailItem: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginVertical: 5,
+    top: -500,  
+    right: -5,
+  },
+  icon111: {
+    marginRight: 10,  // Adjust spacing between icon and text
+  },
+  text11: {
+    fontSize: 22.5,
+    color: 'black',
+    fontWeight: 'bold',
+  },
+  text22: {
+    fontSize: 18,
+    color: 'black',
+    fontWeight: 'bold',
+  },
+  text33: {
+    fontSize: 16,
+    color: 'black',
+    fontWeight: 'bold',
+    textAlign: 'center',  // Centers text within its own container
+  },
+
+  likeButton: {
+    flexDirection: 'row',  // Aligns icon and text horizontally
+    alignItems: 'center',  // Centers them vertically
+    padding: 10,  // Internal padding
+    backgroundColor: '#DDD',  // Button background color
+    borderRadius: 100,  // Rounded corners
+    marginVertical: 5,  // Space above and below the button
+    right: -140,
+  },
+  likeCount: {
+    marginLeft: 10,  // Space between icon and text
+    fontSize: 20,
+    color: 'black',
+    fontWeight: 'bold',
+    right: -87,
+    top: 45,
+  },
+
+    messagesButton: {
+        alignItems: 'center',  // Vertically aligns them
+        padding: 7.5,  // Internal padding
+        backgroundColor: '#FFD700',  // Background color for button
+        borderRadius: 5,  // Rounded corners
+        marginVertical: 35,  // Space above and below the button
+        right: -100,
+    },
+    messagesText: {
+        marginLeft: 5,  // Space between icon and text
+        fontSize: 22.5,
+        color: 'black',
+        fontWeight: 'bold',
+    },
+
+
 
 });
-
-
-
 export default JuniorHomeScreen;
