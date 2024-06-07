@@ -17,8 +17,7 @@ Proje şu anda sınırlı imkanlarla farklı hizmet türlerini içeriyor. İleri
 paylaşımı, güvenlik kısıtlamaları ve diğer geliştirmeler gibi konularda geliştirmeler 
 yapılması planlanıyor. Bu esnek yapı, platformun geniş bir kullanıcı kitlesine hitap 
 etmesini sağlıyor. 
-Bu proje bir dönem içinde başarıyla tamamlandı. Geliştirildiği bu sistem, 
-teknolojinin gücünü kullanarak, IT alnında bulunan uzmanlar ve daha az bilgili olan 
+Geliştirildiği bu sistem, teknolojinin gücünü kullanarak, IT alnında bulunan uzmanlar ve daha az bilgili olan 
 kişiler arasında etkili bir köprü kuruyor.
 
 ![1](https://github.com/QutaibaAlashqar/codaX_trim_app/assets/120109084/6f86b57a-22cf-4098-ad45-441ec33d631e)
