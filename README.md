@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # CodaXtrim
 
 Projem, teknoloji alanında uzmanlar ile öğrenciler veya juniorlar arasında etkili 
