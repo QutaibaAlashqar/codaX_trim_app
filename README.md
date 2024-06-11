@@ -42,8 +42,9 @@ Node.js kullanarak oluşturulan backend tarafı. Bu teknolojiler, uygulamaları
 oluştururken modern yazılım geliştirme ilkelerine sıkı sıkıya bağlı kalınarak kullanıldı. 
 Agile metodolojiyi benimseyerek, kullanıcı ihtiyaçlarına hızlı bir şekilde yanıt verebilen, 
 esnek ve ölçeklenebilir bir sistem geliştirildi. 
-1.1. 
-React-Native ve Mobil Uygulama Geliştirme 
+
+
+1.1. React-Native ve Mobil Uygulama Geliştirme 
 Mobil uygulama geliştirme sürecinde, Facebook'un güçlü ve esnek çerçevesi 
 React Native kullanıldı. React Native, zengin bileşen kütüphanesi ve hızlı geliştirme 
 süreçleri ile hem Android hem de iOS platformlarında sorunsuz çalışan uygulamaların 
@@ -51,8 +52,9 @@ oluşturulmasını sağladı. JavaScript tabanlı React Native, yüksek performa
 görsel olarak etkileyici uygulamaların geliştirilmesinde kritik bir rol oynadı. Uygulama 
 için, kullanıcıların sezgisel olarak gezinebileceği, etkileşimde bulunabileceği ve estetik 
 bir tatmin elde edebileceği bir arayüz tasarlandı. 
-1.2. 
-Node.js ile Back-end tarafı geliştirme 
+
+
+1.2. Node.js ile Back-end tarafı geliştirme 
 Node.js, JavaScript tabanlı bir platformdur ve back-end uygulamaları 
 geliştirmek için kullanılır. Tek dil olarak JavaScript kullanması, geliştirme sürecini 
 kolaylaştırır. Geniş bir modül ekosistemine ve aktif bir topluluğa sahiptir. Proje 
@@ -71,6 +73,8 @@ ihtiyaçlarına ve beklentilerine uygun çözümler geliştirildi. Farklı yönl
 projenin teknik ve tasarım yönlerini güçlendirildi. Bu süreçte, yazılım geliştirme, sistem 
 tasarımı, kullanıcı deneyimi ve proje yönetimi gibi alanlarda kapsamlı deneyimler 
 kazanıldı. 
+
+
 2. Program Yapısı 
 Modern yazılım geliştirme süreçlerinde, başarılı bir uygulamanın arkasında daima 
 sağlam bir mimari, düşünülmüş bir veritabanı tasarımı ve etkin bir ara katman (API) 
@@ -83,8 +87,9 @@ kullanıcının ihtiyaçlarına hızlı bir şekilde yanıt verebilen, esnek ve 
 olarak tasarlandı. Her bir modül, belirli bir işlevi yerine getirirken, birlikte bütün bir 
 sistem olarak uyum içinde çalışıyor. Bu yapı, hem geliştirme sürecini hızlandırdı, hem 
 de gelecekteki genişlemeler ve güncellemeler için sağlam bir temel oluşturdu. 
-2.1. 
-Veritabanı Tasarımı ve T-SQL 
+
+
+2.1. Veritabanı Tasarımı ve T-SQL 
 Projenin veritabanı tasarım süreci, kağıt üzerinde detaylı bir şekilde planlama yaparak 
 başlandı. Bu aşamada, sistemimizin ihtiyaç duyduğu veri türlerini, ilişkileri ve 
 kısıtlamaları belirlendi. Ardından, T-SQL kullanarak bu tasarımı gerçeğe dönüştürüldü. 
@@ -93,8 +98,9 @@ ve birbiriyle mantıksal bağlantılar kurarak veri bütünlüğünü ve ilişki
 sağlıyordur. Tablolar ve ilişkiler, verimlilik, hız ve güvenlik göz önünde bulundurularak 
 optimize edildi. Raporda, bu tabloların ve ilişkilerinin görsellerini sunulacak, böylece 
 veritabanı yapının daha iyi anlaşılmasını sağlanacaktır. 
-2.2. 
-API Geliştirme ve Express.js 
+
+
+2.2. API Geliştirme ve Express.js 
 API (Application Programming Interface), bir uygulamanın veritabanı ve diğer 
 hizmetlerle etkileşimini sağlayan önemli bir bileşendir. Express.js gibi framework'ler, 
 API'lerin hızlı ve verimli bir şekilde geliştirilmesini sağlar. Express.js, JavaScript tabanlı 
@@ -107,6 +113,8 @@ Express.js'in esnek yapısı ve geniş bir middleware ekosistemi, API geliştirm
 sürecini kolaylaştırır ve çeşitli ihtiyaçlara uygun çözümler sunar. Veri işleme, güvenlik, 
 oturum yönetimi gibi birçok önemli özellik Express.js'in temel yetenekleri arasındadır 
 ve bu özellikler API'lerin güvenli ve sağlam olmasını sağlar. 
+
+
 2.2.1. API Hakkında Sonuç 
 Projenin geliştirilmesi sırasında, her bir aşamanın kritik önemi olduğunun 
 farkına varıldı. Yazılımın mimarisinden, veritabanının tasarımına, API'nin 
@@ -137,8 +145,9 @@ Sürekli İyileştirme: Tasarım sürecinin, sürekli bir iyileştirme ve öğre
 Kullanıcı testleri ve analizleri yaparak, tasarımlarının etkinliğini sürekli olarak 
 değerlendirip, gerekli düzenlemeleri yapıldı. Bu sayede, kullanıcı memnuniyetini 
 artırmayı ve ürün kalitemi sürekli iyileştirmeyi hedeflelendi.
-2.6.  
-Back-End  
+
+
+2.6.  Back-End  
 Projenin backend kısmının geliştirilmesi, Node.js ve Javascript kullanarak 
 gerçekleştirildiği zorlu bir macera oldu. Bu süreçte Visual Studio Coda (VSC) gibi güçlü 
 araçlarla çalışarak birçok yeni şey öğrenildi ve önemli başarılar elde edildi. İşte bu 
@@ -166,8 +175,9 @@ React Native ve Visual Studio Code'un bir araya gelmesi, mobil uygulama
 geliştirme sürecini daha verimli, etkili ve keyifli hale getirir. Bu teknolojilerin birlikte 
 kullanılması, geliştiricilere güçlü bir altyapı sunar ve modern mobil uygulamaların 
 başarılı bir şekilde oluşturulmasını sağlar.
+
+
 Genel Sonuç 
- Sonuç 
 Kendi projemde, modern yazılım geliştirme yaklaşımlarını ve teknolojilerini 
 kullanarak önemli başarılar elde ettim. Mobil platformda çalışan etkileyici bir uygulama 
 geliştirdim ve bu uygulama, kullanıcıların günlük yaşamını daha kolay ve verimli hale 
@@ -189,8 +199,9 @@ bir deneyim sunuldu.
 Sonuç olarak, bu projenin başarısı, teknik yetenekler ve kullanıcı odaklı 
 yaklaşımımızın bir sonucudur. Bu projeye katkıda bulunan herkese teşekkür ederim 
 ve gelecekteki başarılar için heyecanla bekliyorum.
-3.2.  
-Uygulama Kullanım Klavuzu 
+
+
+3.2.  Uygulama Kullanım Klavuzu 
 Bu açıklama, Sistemin nasıl çalıştığını özetleyerek size yardımcı olur: 
 Uzman Tarafı 
 Uzman Hesabı Oluşturma ve Giriş Yapma, Yeni uzmanlar sistemde öncelikle bir 
